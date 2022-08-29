@@ -1,26 +1,29 @@
-# This is a basic workflow to help you get started with Actions
-
+# название workflow (последовательности команд)
 name: CI
 
-# Controls when the workflow will run
+# событие, которое должно произойти, чтобы workflow начал выполняться
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
+  # триггер_1 - событие git push
   push:
+    # это ветка, в которую должен быть сделан push
     branches: [ "main" ]
+  # триггер_2 - сработает, когда кто-то сделает запрос на изменение кода в ветке master
   pull_request:
     branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# задачи, которые будут выполняться при запуске workflow
+# блоков может быть несколько, например: build, tests, deploy, happyend
+# каждый job запускается в изолированном окружении
 jobs:
   # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
+    # определяет настройки окружения (аналогично инструкции FROM в докерфайле)
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    # перечень шагов, команд, которые будут выполнены в этом блоке
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
